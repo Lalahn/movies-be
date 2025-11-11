@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("¡Hola! Servidor Express en funcionamiento.");
+  res.send("¡Hola! Servidor en funcionamiento.");
 });
 
 app.listen(PORT, () => {
