@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const ReviewSchema = require("./Review");
-const StreamingLinkSchema = require("./StreamingLink");
+import ReviewSchema from"./Review";
+import StreamingLinkSchema from "./StreamingLink";
 
 const MovieSchema = new Schema({
   // _id es implícito en Mongoose
@@ -35,7 +35,7 @@ const MovieSchema = new Schema({
 const Movie = mongoose.model('Movie', MovieSchema);
 
 // Exportar todos los modelos
-module.exports = {
+export {
   User,
   Actor,
   Movie,
@@ -43,4 +43,4 @@ module.exports = {
   ReviewSchema // Opcional
 };
 
-module.exports = mongoose.model("Movie", MovieSchema);
+export default mongoose.model("Movie", MovieSchema);
