@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const ReviewSchema = new Schema({
+export const ReviewSchema = new Schema({
   // Referencia anidada al usuario que escribió la reseña (Nested Reference)
   userId: {
     type: Schema.Types.ObjectId,
@@ -12,5 +12,3 @@ const ReviewSchema = new Schema({
   comment: { type: String, required: true }, // Texto del comentario
   date: { type: Date, default: Date.now } // Fecha de publicación de la reseña
 }, { _id: false });
-
-module.exports = mongoose.model("Review", ReviewSchema);

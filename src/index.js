@@ -1,17 +1,28 @@
-const express = require("express");
+import express from 'express';
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// 1) Conectar a la base de datos (ejecuta la conexión definida)
+import'./config/database.js';
+
+// 2) Middleware para parsear JSON en cuerpos de petición
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+// 3) Importar rutas
+import userRoutes from './routes/userRoutes.js';
+import actorRoutes from './routes/actorRoutes.js';
+import movieRoutes from './routes/movieRoutes.js';
 
-app.get("/", (req, res) => {
-  res.send("¡Hola! Servidor en funcionamiento xxx.");
-});
+// 4) Usar rutas bajo prefijos
+app.use('/api/user', userRoutes);
+app.use('/api/actor', actorRoutes);
+app.use('/api/movie', movieRoutes);
+
+app.use(express.urlencoded({ extended: true }));
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
 });
+
