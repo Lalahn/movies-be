@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb.net/?appName=MoviesDB", {
   useNewUrlParser: true,
@@ -10,4 +13,3 @@ mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb
 
 export default mongoose;
 
-require('dotenv').config(); // Cargar variables de entorno
