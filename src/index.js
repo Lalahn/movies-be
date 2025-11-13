@@ -1,7 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 
 const app = express();
 
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 // 1) Conectar a la base de datos (ejecuta la conexión definida)
@@ -14,7 +16,6 @@ app.use(express.json());
 import userRoutes from './routes/userRoutes.js';
 import actorRoutes from './routes/actorRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
-import mongoose from 'mongoose';
 
 // 4) Usar rutas bajo prefijos
 app.use('/api/user', userRoutes);

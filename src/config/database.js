@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
-
-mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb.net/?appName=MoviesDB", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
