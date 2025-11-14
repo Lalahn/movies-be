@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-
-mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb.net/?appName=MoviesDB", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -9,3 +8,4 @@ mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb
   .catch(err => console.error('❌ Error al conectar a MongoDB:', err));
 
 export default mongoose;
+

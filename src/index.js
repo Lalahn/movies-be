@@ -1,7 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 
 const app = express();
 
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 // 1) Conectar a la base de datos (ejecuta la conexión definida)
@@ -25,4 +27,3 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
 });
-
