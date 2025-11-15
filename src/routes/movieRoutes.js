@@ -6,6 +6,22 @@ router.get('/', getMovies);
 router.get('/:id', getMovieById);
 
 router.put('/:id', async (req, res) => {
+
+  // Rutas - Solo definen las rutas HTTP y delegan la lógica a los controllers
+// GET /api/movies - Obtener todas las películas
+router.get("/", movieController.getMovies);
+
+// GET /api/movies/:id - Obtener una película por ID
+router.get("/:id", movieController.getMovieById);
+
+// POST /api/movies - Crear una nueva película
+router.post("/", movieController.createMovie);
+
+// PUT /api/movies/:id - Actualizar una película por ID
+router.put("/:id", movieController.updateMovie);
+
+// DELETE /api/movies/:id - Eliminar una película por ID
+router.delete("/:id", movieController.deleteMovie);
   /*const { id } = req.params;
   const data = req.body;
 
@@ -22,6 +38,8 @@ router.put('/:id', async (req, res) => {
   }*/ console.log("Actualizar movie")
 });
 
+module.exports = router;
 export default router;
 
+  
 
