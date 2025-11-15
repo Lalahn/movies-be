@@ -1,6 +1,26 @@
 import express from 'express';
+import Movie from '../models/Movie.js';
 const router = express.Router();
-//import Movie from '../models/Movie';
+
+// GET /api/movies  -> obtener todas las películas
+router.get('/', async (req, res) => {
+  try {
+    const movies = await Movie.find();
+    res.json(movies);
+  } catch (err) {
+    res.status(500).json({ message: 'Error al obtener películas', error: err.message });
+  }
+});
+
+// GET /api/movies/:id  -> obtener una película por ID
+router.get('/:id', async (req, res) => {
+  try {
+    const movie = await Movie.findById(req.params.id);
+    res.json(movie);
+  } catch (err) {
+    res.status(500).json({ message: 'Error al obtener película', error: err.message });
+  }
+});
 
 router.put('/:id', async (req, res) => {
   /*const { id } = req.params;

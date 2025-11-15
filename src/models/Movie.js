@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
+import { ReviewSchema } from "./Review.js";
+import { StreamingLinkSchema } from "./StreamingLink.js";
 const { Schema } = mongoose;
-import ReviewSchema from"./Review";
-import StreamingLinkSchema from "./StreamingLink";
 
 const MovieSchema = new Schema({
   // _id es implícito en Mongoose
@@ -30,17 +30,5 @@ const MovieSchema = new Schema({
     default: []
   }
 });
-
-// Modelo
-const Movie = mongoose.model('Movie', MovieSchema);
-
-// Exportar todos los modelos
-export {
-  User,
-  Actor,
-  Movie,
-  StreamingLinkSchema, // Opcional, solo si necesitas el esquema por separado
-  ReviewSchema // Opcional
-};
 
 export default mongoose.model("Movie", MovieSchema);
