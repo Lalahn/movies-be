@@ -1,26 +1,9 @@
 import express from 'express';
-import Actor from '../models/Actor.js';
+import { getActorById, getActors } from '../controllers/actorController.js';
 const router = express.Router();
 
-// GET /api/actors  -> obtener todos los actores
-router.get('/', async (req, res) => {
-  try {
-    const actors = await Actor.find();
-    res.json(actors);
-  } catch (err) {
-    res.status(500).json({ message: 'Error al obtener actores', error: err.message });
-  }
-});
-
-// GET /api/actors/:id  -> obtener un actor por ID
-router.get('/:id', async (req, res) => {
-  try {
-    const actor = await Actor.findById(req.params.id);
-    res.json(actor);
-  } catch (err) {
-    res.status(500).json({ message: 'Error al obtener actor', error: err.message });
-  }
-});
+router.get('/', getActors);
+router.get('/:id', getActorById);
 
 router.put('/:id', async (req, res) => {
   /*const { id } = req.params;

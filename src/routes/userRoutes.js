@@ -1,26 +1,9 @@
 import express from 'express';
-import User from '../models/User.js';
+import { getUserById, getUsers } from '../controllers/userController.js';
 const router = express.Router();
 
-// GET /api/users  -> obtener todos los usuarios
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: 'Error al obtener usuarios', error: err.message });
-  }
-});
-
-// GET /api/users/:id  -> obtener un usuario por ID
-router.get('/:id', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ message: 'Error al obtener usuario', error: err.message });
-  }
-});
+router.get('/', getUsers);
+router.get('/:id', getUserById);
 
 // PUT /api/users/:id  -> actualizar usuario por id
 router.put('/:id', async (req, res) => {

@@ -29,6 +29,6 @@ const MovieSchema = new Schema({
     type: [ReviewSchema],
     default: []
   }
-});
+}, { collection: 'movies' });
 
 export default mongoose.model("Movie", MovieSchema);
