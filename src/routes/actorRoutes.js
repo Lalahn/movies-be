@@ -1,6 +1,9 @@
 import express from 'express';
+import { getActorById, getActors } from '../controllers/actorController.js';
 const router = express.Router();
-//import Actor from '../models/Actor';
+
+router.get('/', getActors);
+router.get('/:id', getActorById);
 
 router.put('/:id', async (req, res) => {
   /*const { id } = req.params;

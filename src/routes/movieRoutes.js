@@ -1,8 +1,9 @@
 import express from 'express';
+import { getMovieById, getMovies } from '../controllers/movieController.js';
 const router = express.Router();
-//import Movie from '../models/Movie';
 
-router.get('/', ()=> {console.log("Peliculas")})
+router.get('/', getMovies);
+router.get('/:id', getMovieById);
 
 router.put('/:id', async (req, res) => {
   /*const { id } = req.params;

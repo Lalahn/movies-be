@@ -7,7 +7,7 @@ const ActorSchema = new Schema({
   dateOfBirth: { type: Date }, // Fecha de nacimiento
   biography: { type: String }, // Resumen biográfico
   photoURL: { type: String } // URL del contenido multimedia (foto)
-});
+}, { collection: 'actors' });
 
 // Modelo
 export default mongoose.model('Actor', ActorSchema);

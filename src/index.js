@@ -1,6 +1,7 @@
-import express from 'express';
 import dotenv from 'dotenv';
-import {connectDB} from './config/database.js'
+import express from 'express';
+import { connectDB } from './config/database.js';
+
 const app = express();
 
 dotenv.config();
@@ -13,14 +14,14 @@ connectDB();
 app.use(express.json());
 
 // 3) Importar rutas
-import userRoutes from './routes/userRoutes.js';
 import actorRoutes from './routes/actorRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 // 4) Usar rutas bajo prefijos
-app.use('/api/user', userRoutes);
-app.use('/api/actor', actorRoutes);
-app.use('/api/movie', movieRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/actors', actorRoutes);
+app.use('/api/movies', movieRoutes);
 
 app.use(express.urlencoded({ extended: true }));
 
