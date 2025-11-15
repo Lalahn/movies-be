@@ -1,13 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
+import {connectDB} from './config/database.js'
 const app = express();
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 // 1) Conectar a la base de datos (ejecuta la conexión definida)
-import'./config/database.js';
+connectDB();
 
 // 2) Middleware para parsear JSON en cuerpos de petición
 app.use(express.json());
