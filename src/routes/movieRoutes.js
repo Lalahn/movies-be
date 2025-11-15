@@ -2,6 +2,8 @@ import express from 'express';
 const router = express.Router();
 //import Movie from '../models/Movie';
 
+router.get('/', ()=> {console.log("Peliculas")})
+
 router.put('/:id', async (req, res) => {
   /*const { id } = req.params;
   const data = req.body;
