@@ -1,5 +1,5 @@
 import express from 'express';
-import { getActorById, getActors } from '../controllers/actorController.js';
+import { getActorById, getActors, deleteActor } from '../controllers/actorController.js';
 const router = express.Router();
 
 router.get('/', getActors);
@@ -19,5 +19,5 @@ router.put('/:id', async (req, res) => {
     return res.status(500).json({ message: 'Error al actualizar actor', error: err.message });
   }*/ console.log("Actualizar actor")
 });
-
+router.delete('/:id', deleteActor);
 export default router;

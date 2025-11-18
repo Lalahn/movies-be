@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserById, getUsers } from '../controllers/userController.js';
+import { getUserById, getUsers, deleteUser } from '../controllers/userController.js';
 const router = express.Router();
 
 router.get('/', getUsers);
@@ -21,5 +21,5 @@ router.put('/:id', async (req, res) => {
     return res.status(500).json({ message: 'Error al actualizar usuario', error: err.message });
   }*/ console.log("Actualizar usuarios")
 });
-
+router.delete('/:id', deleteUser);
 export default router;
