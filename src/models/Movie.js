@@ -1,46 +1,38 @@
 import mongoose from 'mongoose';
+import streamingLinkSchema from './StreamingLink.js';
+import reviewSchema from './Review.js'; 
+
 const { Schema } = mongoose;
-import ReviewSchema from"./Review";
-import StreamingLinkSchema from "./StreamingLink";
 
-const MovieSchema = new Schema({
-  // _id es implícito en Mongoose
-  title: { type: String, required: true }, // Título de la película
-  synopsis: { type: String }, // Breve resumen de la trama
-  releaseYear: { type: Number }, // Año de lanzamiento
-  genres: { type: [String], default: [] }, // Array de Strings (Lista de géneros)
-  posterURL: { type: String }, // URL del póster (Multimedia Field)
-  trailerURL: { type: String }, // URL del tráiler (Multimedia Field)
+const movieSchema = new Schema({
+  title: { type: String, required: true },
+  synopsis: { type: String },
+  releaseYear: { type: Number },
+  genres: { type: [String], default: [] },
+  posterURL: { type: String },
+  trailerURL: { type: String },
 
-  // Referencia M:N a la colección Actors (Reference Array)
   actorIds: [{
     type: Schema.Types.ObjectId,
     ref: 'Actor'
   }],
 
-  // Anidamiento (Embedding) de StreamingLink (Array of Documents)
+  // documentos anidados
   streamingLinks: {
-    type: [StreamingLinkSchema],
+    type: [streamingLinkSchema],
     default: []
   },
 
-  // Anidamiento (Embedding) de Review (Array of Documents)
   reviews: {
-    type: [ReviewSchema],
+    type: [reviewSchema],
     default: []
   }
+}, {
+  timestamps: true // opcional: agrega createdAt y updatedAt
 });
 
-// Modelo
-const Movie = mongoose.model('Movie', MovieSchema);
+// Crear el modelo una única vez
+const Movie = mongoose.models.Movie || mongoose.model('Movie', movieSchema);
 
-// Exportar todos los modelos
-export {
-  User,
-  Actor,
-  Movie,
-  StreamingLinkSchema, // Opcional, solo si necesitas el esquema por separado
-  ReviewSchema // Opcional
-};
+export default Movie;
 
-export default mongoose.model("Movie", MovieSchema);

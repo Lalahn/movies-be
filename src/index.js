@@ -1,28 +1,42 @@
+// src/index.js
 import express from 'express';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import cors from 'cors';
 
-const app = express();
+// Cargar variables de entorno
+dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+// Conexión a la base de datos
+import './config/database.js';
 
-// 1) Conectar a la base de datos (ejecuta la conexión definida)
-import'./config/database.js';
-
-// 2) Middleware para parsear JSON en cuerpos de petición
-app.use(express.json());
-
-// 3) Importar rutas
+// Rutas
 import userRoutes from './routes/userRoutes.js';
 import actorRoutes from './routes/actorRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
 
-// 4) Usar rutas bajo prefijos
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Prefijos (según tu requerimiento en singular)
 app.use('/api/user', userRoutes);
 app.use('/api/actor', actorRoutes);
 app.use('/api/movie', movieRoutes);
 
-app.use(express.urlencoded({ extended: true }));
+app.get('/', (req, res) => res.send('API MovieDB funcionando'));
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en el puerto: ${PORT}`);
+// Iniciar servidor cuando Mongoose esté conectado
+mongoose.connection.once("connected", () => {
+  console.log("✅ Mongoose conectado. Iniciando servidor...");
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  });
 });
+
+
 
