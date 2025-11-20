@@ -1,11 +1,19 @@
 import mongoose from 'mongoose';
 
+export const connectDB = async () => {
+  try {
+    // La URI estará disponible aquí porque la función se llama
+    // después de dotenv.config() en index.js
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
 
-mongoose.connect("mongodb+srv://lalahn:9w31U12qht5cKooW@moviesdb.5feyyzm.mongodb.net/?appName=MoviesDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => console.log('✅ Conexión exitosa a MongoDB (MovieDB)'))
-  .catch(err => console.error('❌ Error al conectar a MongoDB:', err));
+    console.log(`✅ Conexión exitosa a MongoDB (MovieDB): ${conn.connection.host}`);
 
-export default mongoose;
+  } catch (err) {
+    console.error('❌ Error al conectar a MongoDB:', err.message);
+    // Salir del proceso con un error crítico
+    process.exit(1);
+  }
+};

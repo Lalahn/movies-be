@@ -1,8 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Movie from '../models/Movie.js';
-
+import { getMovieById, getMovies } from '../controllers/movieController.js';
 const router = express.Router();
+
+router.get('/', getMovies);
+router.get('/:id', getMovieById);
 
 // PUT /api/movies/:id  -> actualización parcial o total
 router.put('/:id', async (req, res) => {

@@ -2,6 +2,10 @@ import express from 'express';
 import User from '../models/User.js';
 
 const router = express.Router();
+import { getUserById, getUsers } from '../controllers/userController.js';
+
+router.get('/', getUsers);
+router.get('/:id', getUserById);
 
 // PUT /api/users/:id  -> actualizar usuario por id
 router.put('/:id', async (req, res) => {

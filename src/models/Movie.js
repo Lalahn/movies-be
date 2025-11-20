@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-import streamingLinkSchema from './StreamingLink.js';
-import reviewSchema from './Review.js'; 
-
+import { ReviewSchema } from "./Review.js";
+import { StreamingLinkSchema } from "./StreamingLink.js";
 const { Schema } = mongoose;
 
-const movieSchema = new Schema({
+const MovieSchema = new Schema({
   title: { type: String, required: true },
   synopsis: { type: String },
   releaseYear: { type: Number },
@@ -19,20 +18,14 @@ const movieSchema = new Schema({
 
   // documentos anidados
   streamingLinks: {
-    type: [streamingLinkSchema],
+    type: [StreamingLinkSchema],
     default: []
   },
 
   reviews: {
-    type: [reviewSchema],
+    type: [ReviewSchema],
     default: []
   }
-}, {
-  timestamps: true // opcional: agrega createdAt y updatedAt
-});
+}, { collection: 'movies' });
 
-// Crear el modelo una única vez
-const Movie = mongoose.models.Movie || mongoose.model('Movie', movieSchema);
-
-export default Movie;
-
+export default mongoose.model("Movie", MovieSchema);
