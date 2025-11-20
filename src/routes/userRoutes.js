@@ -1,8 +1,7 @@
 import express from 'express';
 import User from '../models/User.js';
-
+import { getUserById, getUsers, deleteUser } from '../controllers/userController.js';
 const router = express.Router();
-import { getUserById, getUsers } from '../controllers/userController.js';
 
 router.get('/', getUsers);
 router.get('/:id', getUserById);
@@ -29,4 +28,5 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.delete('/:id', deleteUser);
 export default router;

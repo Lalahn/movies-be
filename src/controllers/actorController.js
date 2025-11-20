@@ -17,3 +17,13 @@ export const getActorById = async (req, res) => {
     res.status(500).json({ message: "Error al obtener actor", error });
   }
 };
+// Eliminar película
+export const deleteActor = async (req, res) => {
+  try {
+    const deleted = await Actor.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Actor no encontrado" });
+    res.json({ message: "Actor eliminado correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar actor", error });
+  }
+};
