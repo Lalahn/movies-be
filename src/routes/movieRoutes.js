@@ -1,11 +1,12 @@
 import express from 'express';
-import { getMovieById, getMovies } from '../controllers/movieController.js';
+import { getMovieById, getMovies, deleteMovie } from '../controllers/movieController.js';
 const router = express.Router();
 
 router.get('/', getMovies);
 router.get('/:id', getMovieById);
 
 router.put('/:id', async (req, res) => {
+
   /*const { id } = req.params;
   const data = req.body;
 
@@ -22,6 +23,10 @@ router.put('/:id', async (req, res) => {
   }*/ console.log("Actualizar movie")
 });
 
+// DELETE /api/movies/:id - Eliminar una película por ID
+router.delete("/:id", deleteMovie);
+
 export default router;
 
+  
 
