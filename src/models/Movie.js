@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
-import { ReviewSchema } from "./Review.js";
-import { StreamingLinkSchema } from "./StreamingLink.js";
+import streamingLinkSchema from './StreamingLink.js';
+import reviewSchema from './Review.js';
+
 const { Schema } = mongoose;
 
 const MovieSchema = new Schema({
@@ -16,16 +17,18 @@ const MovieSchema = new Schema({
     ref: 'Actor'
   }],
 
-  // documentos anidados
   streamingLinks: {
-    type: [StreamingLinkSchema],
+    type: [streamingLinkSchema],
     default: []
   },
 
   reviews: {
-    type: [ReviewSchema],
+    type: [reviewSchema],
     default: []
   }
 }, { collection: 'movies' });
 
-export default mongoose.model("Movie", MovieSchema);
+const Movie = mongoose.models.Movie || mongoose.model('Movie', MovieSchema);
+
+export default Movie;
+

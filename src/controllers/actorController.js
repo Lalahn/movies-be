@@ -27,3 +27,18 @@ export const deleteActor = async (req, res) => {
     res.status(500).json({ message: "Error al eliminar actor", error });
   }
 };
+
+// Actualizar actor (PUT)
+export const updateActor = async (req, res) => {
+  try {
+    const updated = await Actor.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!updated) return res.status(404).json({ message: "Actor no encontrado" });
+    res.json({ message: "Actor actualizado", actor: updated });
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar actor", error });
+  }
+};
+
