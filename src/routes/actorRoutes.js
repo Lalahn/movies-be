@@ -1,23 +1,16 @@
+// src/routes/actorRoutes.js
 import express from 'express';
-import { getActorById, getActors, deleteActor } from '../controllers/actorController.js';
+import { getActors, getActorById, deleteActor, updateActor } from '../controllers/actorController.js';
+
 const router = express.Router();
 
 router.get('/', getActors);
 router.get('/:id', getActorById);
 
-router.put('/:id', async (req, res) => {
-  /*const { id } = req.params;
-  const data = req.body;
+router.put('/:id', updateActor);
 
-  try {
-    const updatedActor = await Actor.findByIdAndUpdate(id, data, { new: true, runValidators: true });
-
-    if (!updatedActor) return res.status(404).json({ message: 'Actor no encontrado' });
-
-    return res.json({ message: 'Actor actualizado', actor: updatedActor });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error al actualizar actor', error: err.message });
-  }*/ console.log("Actualizar actor")
-});
 router.delete('/:id', deleteActor);
+
 export default router;
+
+

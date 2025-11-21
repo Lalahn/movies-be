@@ -27,3 +27,17 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: "Error al eliminar usuario", error });
   }
 };
+
+// Actualizar usuario (PUT)
+export const updateUser = async (req, res) => {
+  try {
+    const updated = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!updated) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json({ message: "Usuario actualizado", user: updated });
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar usuario", error });
+  }
+};

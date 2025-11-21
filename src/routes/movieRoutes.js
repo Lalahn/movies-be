@@ -1,32 +1,24 @@
+// src/routes/movieRoutes.js
 import express from 'express';
-import { getMovieById, getMovies, deleteMovie } from '../controllers/movieController.js';
+import { getMovies, getMovieById, deleteMovie, updateMovie } from '../controllers/movieController.js';
+
 const router = express.Router();
 
+// Lista películas
 router.get('/', getMovies);
+
+// Obtener película por id
 router.get('/:id', getMovieById);
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', updateMovie);
 
-  /*const { id } = req.params;
-  const data = req.body;
-
-  try {
-    // Si quieres que campos anidados se reemplacen, este método funciona.
-    // Para operaciones específicas sobre arrays (push/pull) usar $push / $pull con updateOne.
-    const updatedMovie = await Movie.findByIdAndUpdate(id, data, { new: true, runValidators: true });
-
-    if (!updatedMovie) return res.status(404).json({ message: 'Película no encontrada' });
-
-    return res.json({ message: 'Película actualizada', movie: updatedMovie });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error al actualizar película', error: err.message });
-  }*/ console.log("Actualizar movie")
-});
-
-// DELETE /api/movies/:id - Eliminar una película por ID
-router.delete("/:id", deleteMovie);
+// Eliminar película
+router.delete('/:id', deleteMovie);
 
 export default router;
 
+ 
+
   
+
 

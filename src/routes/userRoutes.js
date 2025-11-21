@@ -1,25 +1,15 @@
+// src/routes/userRoutes.js
 import express from 'express';
-import { getUserById, getUsers, deleteUser } from '../controllers/userController.js';
+import { getUsers, getUserById, deleteUser, updateUser } from '../controllers/userController.js';
+
 const router = express.Router();
 
 router.get('/', getUsers);
 router.get('/:id', getUserById);
 
-// PUT /api/users/:id  -> actualizar usuario por id
-router.put('/:id', async (req, res) => {
-  /*const { id } = req.params;         // id en la URL
-  const data = req.body;             // datos enviados en el cuerpo JSON
+router.put('/:id', updateUser);
 
-  try {
-    // findByIdAndUpdate busca por id y aplica los cambios; { new: true } devuelve el documento actualizado
-    const updatedUser = await User.findByIdAndUpdate(id, data, { new: true, runValidators: true });
-
-    if (!updatedUser) return res.status(404).json({ message: 'Usuario no encontrado' });
-
-    return res.json({ message: 'Usuario actualizado', user: updatedUser });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error al actualizar usuario', error: err.message });
-  }*/ console.log("Actualizar usuarios")
-});
 router.delete('/:id', deleteUser);
+
 export default router;
+
