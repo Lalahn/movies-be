@@ -17,6 +17,7 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ message: "Error al obtener usuario", error });
   }
 };
+
 // Eliminar usuario
 export const deleteUser = async (req, res) => {
   try {
@@ -39,5 +40,16 @@ export const updateUser = async (req, res) => {
     res.json({ message: "Usuario actualizado", user: updated });
   } catch (error) {
     res.status(500).json({ message: "Error al actualizar usuario", error });
+  }
+};
+
+// Crear usuario
+export const createUser = async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear usuario", error });
   }
 };

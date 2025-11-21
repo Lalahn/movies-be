@@ -17,6 +17,7 @@ export const getActorById = async (req, res) => {
     res.status(500).json({ message: "Error al obtener actor", error });
   }
 };
+
 // Eliminar película
 export const deleteActor = async (req, res) => {
   try {
@@ -42,3 +43,13 @@ export const updateActor = async (req, res) => {
   }
 };
 
+// Crear actor
+export const createActor = async (req, res) => {
+  try {
+    const newActor = new Actor(req.body);
+    await newActor.save();
+    res.status(201).json(newActor);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear actor", error });
+  }
+};

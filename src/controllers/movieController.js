@@ -19,6 +19,7 @@ export const getMovieById = async (req, res) => {
     res.status(500).json({ message: "Error al obtener película", error });
   }
 };
+
 // Eliminar película
 export const deleteMovie = async (req, res) => {
   try {
@@ -41,5 +42,16 @@ export const updateMovie = async (req, res) => {
     res.json({ message: "Película actualizada", movie: updated });
   } catch (error) {
     res.status(500).json({ message: "Error al actualizar película", error });
+  }
+};
+
+// Crear película (POST)
+export const createMovie = async (req, res) => {
+  try {
+    const newMovie = new Movie(req.body);
+    await newMovie.save();
+    res.status(201).json(newMovie);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear película", error });
   }
 };
