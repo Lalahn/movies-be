@@ -7,7 +7,6 @@ const router = express.Router();
 router.get('/', getActors);
 router.get('/:id', getActorById);
 
-// PUT actualizar actor (si no existe updateActor lo añadimos)
 router.put('/:id', updateActor);
 
 router.delete('/:id', deleteActor);

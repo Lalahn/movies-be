@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-const ReviewSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  rating: { type: Number, min: 0, max: 5 },
-  comment: String,
-  date: { type: Date, default: Date.now }
-}, { _id: true }); // aquí dejamos _id para poder referenciar reseñas si hace falta
-
-export default ReviewSchema;
-
+export const ReviewSchema = new Schema({
+  // Referencia anidada al usuario que escribió la reseña (Nested Reference)
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User', // Referencia a la colección 'Users'
+    required: true
+  },
+  rating: { type: Number, min: 1, max: 5, required: true }, // Calificación de 1 a 5
+  comment: { type: String, required: true }, // Texto del comentario
+  date: { type: Date, default: Date.now } // Fecha de publicación de la reseña
+}, { _id: false });
